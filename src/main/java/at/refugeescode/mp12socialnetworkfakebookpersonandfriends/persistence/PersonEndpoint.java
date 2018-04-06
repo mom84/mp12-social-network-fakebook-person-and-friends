@@ -1,14 +1,13 @@
 package at.refugeescode.mp12socialnetworkfakebookpersonandfriends.persistence;
 import org.springframework.web.bind.annotation.*;
-
 import java.util.List;
 import java.util.Optional;
+
 
 @RestController
 public class PersonEndpoint {
 
     private PersonRepository personRepository;
-
 
     public PersonEndpoint(PersonRepository personRepository) {
         this.personRepository = personRepository;
@@ -25,7 +24,7 @@ public class PersonEndpoint {
         return person;
     }
 
-    @GetMapping("/persons/{id1}/friend/{id2}")
+    @PutMapping("/persons/{id1}/friend/{id2}")
     void addFriend(@PathVariable Long id1, @PathVariable Long id2) {
         Optional<Person> person = personRepository.findById(id1);
         Optional<Person> friend = personRepository.findById(id2);
@@ -36,7 +35,7 @@ public class PersonEndpoint {
     }
 
 
-    @GetMapping("/persons/{id1}/unfriend/{id2}")
+    @PutMapping("/persons/{id1}/unfriend/{id2}")
     void removeFriend(@PathVariable Long id1, @PathVariable Long id2) {
         Optional<Person> person = personRepository.findById(id1);
         Optional<Person> friend = personRepository.findById(id2);
